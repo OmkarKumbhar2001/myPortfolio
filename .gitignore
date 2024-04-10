@@ -8,6 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 ./portfolio/node_modules
+./sip-calculator/node_modules
 node_modules
 dist
 dist-ssr
