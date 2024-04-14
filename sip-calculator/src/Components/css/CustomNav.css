@@ -1,0 +1,27 @@
+.mainAllDiv{
+    height: 100vh;
+    min-height: 100vh;
+    min-width: 100vw;
+}
+.customnav{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    color: rgb(0, 0, 0);
+    height: 6rem;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo{
+    height: 5rem;
+}
+.logobar{
+    display: flex;
+    align-items: center;
+}
+.logobar p{
+    padding: 0.3rem;
+    border: 1px solid black;
+    border-radius: 3rem;
+    font-size: 0.6rem;
+}
