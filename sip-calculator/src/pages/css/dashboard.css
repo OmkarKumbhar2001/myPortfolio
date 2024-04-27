@@ -8,3 +8,26 @@
    align-items: center;
    gap: 1rem;
 }
+.modified{
+    width: 100vw;
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+    align-content: center;
+    gap: 2rem;
+}
+.custom-form-classname{
+    width: 40%;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+@media screen and (max-width: 720px){
+    .custom-form-classname{
+        width: 80%;
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+}
+  

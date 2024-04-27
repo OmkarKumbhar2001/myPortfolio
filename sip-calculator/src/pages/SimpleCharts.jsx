@@ -4,15 +4,15 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 const SimpleCharts = () => {
     const sipData = useSelector(state => state.values.sipYearData);
     console.log(sipData)
-    console.log("Est returns",parseInt(sipData?.totalAmount) + parseInt(sipData?.invested_amount))
+    console.log("Est returns",parseInt(sipData?.totalAmount) - parseInt(sipData?.invested_amount))
     const chartData = [
         {
           name: "Invested Amount",
           value: parseFloat(sipData?.invested_amount)
         },
         {
-          name: "Gained",
-          value: parseFloat(sipData?.totalAmount)
+          name: "Gained : ",
+          value: parseInt(sipData?.totalAmount) - parseInt(sipData?.invested_amount)
         }
       ];
     
@@ -29,7 +29,7 @@ const SimpleCharts = () => {
         cy="50%"
         outerRadius={100}
         fill="#8884d8"
-        animationDuration={800} 
+        animationDuration={200} 
       >
         {chartData.map((entry, index) => (
           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

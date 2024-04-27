@@ -8,9 +8,11 @@ import { setAllYearsDataForSip, updateMainFalg } from "@/toolkit/valuesSlice";
 import { toast } from "sonner";
 import calculateSIP from "@/utils/sipFunction";
 import SimpleCharts from "./SimpleCharts";
+import addCommas from "@/utils/addCommas";
 
 const DashBoard = () => {
   const dispatch = useDispatch();
+  const [sipCalculatedData, setSipCalculatedData] = useState("");
   const [monthlyInvestment, setMonthlyInvestment] = useState(1000);
   const [expectedReturn, setExpectedReturn] = useState(10);
   const [timePeriod, setTimePeriod] = useState(10);
@@ -67,6 +69,8 @@ const DashBoard = () => {
 
     try {
       const data = calculateSIP(monthlyInvestment, expectedReturn, timePeriod);
+      console.log(data);
+      setSipCalculatedData(data);
       dispatch(setAllYearsDataForSip(data));
       toast.success("Data calculated successfully!");
     } catch (error) {
@@ -77,9 +81,9 @@ const DashBoard = () => {
   return (
     <div className="landingpage">
       <h1 className="text-3xl font-bold">SIP Calculator</h1>
-      <div className="flex row-auto flex-wrap-reverse modified">
-        <div className=" flex flex-col">
-          <div className="grid w-full max-w-sm items-center gap-1.5">
+      <div className="flex flex-wrap modified">
+        <div className=" flex flex-col custom-form-classname">
+          <div className="grid w-full items-center gap-1.5">
             <Label htmlFor="investment">Monthly Investment</Label>
             <Input
               type="number"
@@ -89,7 +93,7 @@ const DashBoard = () => {
               className="focus-visible:ring-0"
             />
           </div>
-          <div className="grid w-full max-w-sm items-center gap-1.5">
+          <div className="grid w-full items-center gap-1.5">
             <Label htmlFor="returnvalues">Expected Return (%)</Label>
             <Input
               type="number"
@@ -99,7 +103,7 @@ const DashBoard = () => {
               className="focus-visible:ring-0"
             />
           </div>
-          <div className="grid w-full max-w-sm items-center gap-1.5">
+          <div className="grid w-full  items-center gap-1.5">
             <Label htmlFor="period">Time Period (Years)</Label>
             <Input
               type="number"
@@ -109,11 +113,36 @@ const DashBoard = () => {
               className="focus-visible:ring-0"
             />
           </div>
-          <div className="grid w-full max-w-sm items-center gap-1.5">
+          <div className="grid w-full  items-center gap-1.5">
             <Button onClick={handleSubmit}>Submit</Button>
           </div>
+          <div className="grid w-full">
+            {sipCalculatedData && (
+              <div className="flex flex-col justify-between gap-1">
+                <div className="flex justify-between mb-3">
+                  <b>Invested Amount: </b>
+                  <p> {addCommas(sipCalculatedData?.invested_amount.toLocaleString())}</p>
+                </div>
+                <div className="flex justify-between mb-3">
+                  <b>Est Return: </b>
+                  <p>
+                    
+                    {addCommas((
+                      sipCalculatedData?.totalAmount -
+                      sipCalculatedData?.invested_amount
+                    ).toFixed(2).toLocaleString())}
+                  </p>
+                </div>
+                <div className="flex justify-between mb-3">
+                  <b>Total value: </b>
+                  <p> {addCommas(sipCalculatedData?.totalAmount)}</p>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
-        <SimpleCharts />
+        {sipCalculatedData&&
+        <SimpleCharts />}
       </div>
     </div>
   );
