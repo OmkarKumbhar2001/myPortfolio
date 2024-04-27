@@ -4,7 +4,7 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 const SimpleCharts = () => {
     const sipData = useSelector(state => state.values.sipYearData);
     console.log(sipData)
-    console.log("Est returns",parseInt(sipData?.totalAmount) - parseInt(sipData?.invested_amount))
+   
     const chartData = [
         {
           name: "Invested Amount",
@@ -17,7 +17,7 @@ const SimpleCharts = () => {
       ];
     
       // Colors for the pie chart slices
-      const COLORS = ['#0088FE', '#00C49F'];
+      const COLORS = ['black', '#e0e0e0'];
   return (
     <div>
           <PieChart width={400} height={400}>

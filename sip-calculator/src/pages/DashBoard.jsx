@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import calculateSIP from "@/utils/sipFunction";
 import SimpleCharts from "./SimpleCharts";
 import addCommas from "@/utils/addCommas";
+import BarDiagram from "@/Components/BarDiagram";
 
 const DashBoard = () => {
   const dispatch = useDispatch();
@@ -69,7 +70,6 @@ const DashBoard = () => {
 
     try {
       const data = calculateSIP(monthlyInvestment, expectedReturn, timePeriod);
-      console.log(data);
       setSipCalculatedData(data);
       dispatch(setAllYearsDataForSip(data));
       toast.success("Data calculated successfully!");
@@ -114,7 +114,7 @@ const DashBoard = () => {
             />
           </div>
           <div className="grid w-full  items-center gap-1.5">
-            <Button onClick={handleSubmit}>Submit</Button>
+            <Button onClick={handleSubmit}>Calculate</Button>
           </div>
           <div className="grid w-full">
             {sipCalculatedData && (
@@ -144,6 +144,8 @@ const DashBoard = () => {
         {sipCalculatedData&&
         <SimpleCharts />}
       </div>
+      {sipCalculatedData&&
+        <BarDiagram />}
     </div>
   );
 };
